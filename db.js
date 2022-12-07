@@ -1,6 +1,6 @@
 const sqlite3 = require("sqlite3").verbose()
 
-export function createDatabase() {
+function initDatabase() {
   let db = new sqlite3.Database(
     "AutoTrader.db",
     sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE,
@@ -53,28 +53,43 @@ function createTables(db) {
     }
   )
 }
+// function addVehicle(db, data) {
+//   let sql = `
+//   INSERT INTO vehicles (id, title, make, year, price, link, odometer) VALUES (?, ?, ?, ?, ?, ?, ?)
+//   `
+//   db.run(sql, [data.id, data.title, data.make, data.year, data.price, data.link, data.odometer], (err) => {
+//     if (err) {
+//       console.error(err.message)
+//     }
+//     console.log("Row added to the vehicles table")
+//   })
+//   db.close((err) => {
+//     if (err) {
+//       console.error(err.message)
+//     }
+//     console.log("Closed the database connection")
+//   })
+// }
 
-export function addVehicle(db, data) {
-  let sql = `
-  INSERT INTO vehicles (id, title, make, year, price, link, odometer) VALUES (?, ?, ?, ?, ?, ?, ?)
-  `
-  db.run(sql, [id, title, make, year, price, link, odometer], (err) => {
-    if (err) {
-      console.error(err.message)
-    }
-    console.log("Row added to the vehicles table")
-  })
-  db.close((err) => {
-    if (err) {
-      console.error(err.message)
-    }
-    console.log("Closed the database connection")
-  })
+// db.close((err) => {
+//   if (err) {
+//     console.error(err.message)
+//   }
+//   console.log("Closed the database connection")
+// })
+
+// let data = {
+//   id: 123,
+//   title: "abc",
+//   make: "coco",
+//   year: 2020,
+//   price: 2020,
+//   link: "Abc",
+//   odometer: "2333",
+// }
+// db = createDatabase()
+// addVehicle(db, data)
+
+module.exports = {
+  initDatabase
 }
-
-db.close((err) => {
-  if (err) {
-    console.error(err.message)
-  }
-  console.log("Closed the database connection")
-})
