@@ -27,7 +27,7 @@ async function main() {
   }
   let timenow = new Date
   let hour = timenow.getHours()
-  if (hour < 12) {
+  if (hour < 23) {
     main()
   }
 }

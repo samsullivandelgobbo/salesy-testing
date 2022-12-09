@@ -1,5 +1,6 @@
 const playwright = require("playwright")
 const fs = require('fs')
+const { randomInt } = require("crypto")
 async function main() {
   const browser = await playwright.chromium.launch({
     headless: false,
@@ -77,15 +78,19 @@ async function main() {
 
 
 
-
+  Array.prototype.random = function () {
+    return this[Math.floor((Math.random() * this.length))]
+  }
   let dataLen = 0
   let scraped = {}
-  let i = -100
+  let i = randomInt(90000)
+  const sort = [35, 10, 9, 3, 4, 11, 12, 7, 8]
+  let srt = sort.random()
   while (dataLen < 250000) {
     try {
 
 
-      await page.goto(`https://www.autotrader.ca/cars/?rcp=100&rcs=${i += 100}&srt=4&inMarket=advancedSearch`)
+      await page.goto(`https://www.autotrader.ca/cars/?rcp=100&rcs=${i += 100}&srt=${srt}&inMarket=advancedSearch`)
       let nScrape = await scrapePage()
 
       dataLen += nScrape.dataLen
@@ -95,6 +100,8 @@ async function main() {
       console.log('object length', Object.keys(scraped).length)
     } catch (err) {
       console.log('ERROR @ 96\n\n\n\n', err)
+      page.close()
+
       return scraped
     }
   }
