@@ -24,14 +24,18 @@ async function getLinks() {
 async function main() {
   let links = await getLinks()
   links.forEach((link) => {
-    console.log(link)
+    scrapePage(link)
   })
 }
 
 main()
 
-// const browser = await playwright.chromium.launch({
-//   headless: false,
-// })
-// const page = await browser.newPage()
-// await page.goto(`https://autotrader.ca/${link}`)
+async function scrapePage(link) {
+  const browser = await playwright.chromium.launch({
+    headless: true,
+  })
+  const page = await browser.newPage()
+  await page.goto(`https://autotrader.ca/${link}`)
+
+  console.log(page.url)
+}
