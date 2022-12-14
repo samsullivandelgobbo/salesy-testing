@@ -83,9 +83,11 @@ async function main() {
   }
   let dataLen = 0
   let scraped = {}
-  let i = randomInt(90000)
-  const sort = [35, 10, 9, 3, 4, 11, 12, 7, 8]
-  let srt = sort.random()
+  // let i = randomInt(90000)
+  let i = 0
+  // const sort = [35, 10, 9, 3, 4, 11, 12, 7, 8]
+  const srt = 9
+  // let srt = sort.random()
   while (dataLen < 250000) {
     try {
 
